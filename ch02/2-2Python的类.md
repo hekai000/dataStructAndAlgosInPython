@@ -23,7 +23,7 @@ class Rational0:
 		print(str(self.num) + "/" + str(self.den))
 ```
 
-### 非实例方法
+### 非实例方法(静态方法)
 
 1. 不依赖类的对象
 2. 类的实现需要使用的一种辅助功能，局部使用
@@ -41,5 +41,17 @@ object.__mod__(self, other)
 object.__pow__(self, other[, modulo])
 ```
 
+### truediv 和 floordiv
+
+```
+>>> from __future__ import division
+>>> 5//3
+1
+>>> 5/3
+1.6666666666666667
+```
+1. // 为truediv， 只有```from __future__ import division```才生效， 否则跟floordiv一样
+2. / 为floordiv， 求商，取整
+
 ### 完整Rational类
-[link] (file:\\\H:\kdcsTestProj\dataStructAndAlgosInPython\ch02\2-2Python的类.md)
+[Rational类] (https://github.com/hekai000/dataStructAndAlgosInPython/blob/master/ch02/2-2Rational.py)

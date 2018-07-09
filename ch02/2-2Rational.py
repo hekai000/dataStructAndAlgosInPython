@@ -19,6 +19,9 @@
 
 '''
 class Rational:
+	# 求最大公因子的算法(辗转相除法)
+	#1.a÷b ，令r为所得余数（0≤r＜b）。若r=0，算法结束；b即为答案。
+	#2.互换：置a←b，b←r，并返回第一步。
 	@staticmethod
 	def _gcd(m, n):
 		if n == 0:
@@ -73,9 +76,27 @@ class Rational:
 		num = self._num * another._den - self._den * another._num
 		return Rational(num, den)
 
-a = Rational(-2, 8)
-b = Rational(-7, 8)
-c = a.plus(b)
-d = a - b
 
-d.print2()
+	def __eq__(self, another):
+		return self._num * another.den() == self._den * another.num()
+
+	def __lt__(self, another):
+		return self._num * another.den() < self._den * another.num()
+
+	def __str__(self):
+		return str(self._num) + "/" + str(self._den)
+
+five = Rational(5)
+x = Rational(3, 5)
+x.print2()
+print x
+
+y = five + x * Rational(5, 17)
+if y < Rational(123, 11):
+	print "y lt 123 11"
+
+t = type(five)
+if isinstance(five, Rational):
+	print "five is Rational type"
+else:
+	print "five is not Rational type"
