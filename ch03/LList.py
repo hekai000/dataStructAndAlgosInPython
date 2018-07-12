@@ -136,9 +136,9 @@ def myprint(elem):
 # print "\n"
 # for x in mlist1.elements():
 # 	print x,
-
-mlist2 = LList()
-mlist2.insert(3)
-mlist2.insert(4)
-mlist2.insert(5,4)
-mlist2.printall()
+if __name__ == "__main__":
+	mlist2 = LList()
+	mlist2.insert(3)
+	mlist2.insert(4)
+	mlist2.insert(5,4)
+	mlist2.printall()
