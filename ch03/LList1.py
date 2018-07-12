@@ -56,14 +56,37 @@ class LLlist1(LList):
 		p.next = None
 		self._rear = p
 		return e
+	def insert(self, elem, i=0):
+		p = self._head
+		if i == 0:
+			if self._head is None:
+
+				self._head = LNode(elem, self._head)
+				self._rear = self._head
+			else:
+				self._head = LNode(elem, self._head)
+			return
+		elif i != 0 and self._head is None:
+			raise LinkedListUnderflow("insert")
+		elif self.length() < i or i < 0:
+			raise LinkedListUnderflow("insert length error")
+		else:
+			pass
+		while p is not None and (i - 1) > 0:
+			i -= 1
+			p = p.next
+		p.next = LNode(elem, p.next)
+		self._rear = p.next
 
 if __name__ == "__main__":
 	from random import randint
 	mlist1 = LLlist1()
-	mlist1.prepend(99)
-	for i in range(11, 20):
-		mlist1.append(randint(1, 20))
-	mlist1.printall()
+	# mlist1.prepend(99)
+	# for i in range(11, 20):
+	# 	mlist1.append(randint(1, 20))
+	# mlist1.printall()
+	#
+	# for x in mlist1.filter(lambda y:y % 2 == 0):
+	# 	print x,
 
-	for x in mlist1.filter(lambda y:y % 2 == 0):
-		print x,
+	mlist1.insert(4, 0)
