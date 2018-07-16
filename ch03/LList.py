@@ -11,7 +11,7 @@
 
 @software: garner
 
-@file: 2-6类定义实例.py
+@file: LList.py
 
 @time: 2018/7/10 11:39
 
@@ -121,6 +121,33 @@ class LList:
 			p = p.next
 		p.next = LNode(elem, p.next)
 
+	def reverse(self):
+		p = None
+		while self._head is not None:
+			q = self._head
+			self._head = q.next
+			q.next = p
+			p = q
+		self._head = p
+
+	def sort1(self):
+		if self.is_empty():
+			return
+		crt = self._head.next
+		while crt is not None:
+			x = crt.elem
+			p = self._head
+			while p is not crt and p.elem <= x:
+				p = p.next
+			while p is not crt:
+				y = p.elem
+				p.elem = x
+				x = y
+				p = p.next
+			crt.elem = x
+			crt = crt.next
+
+
 def myprint(elem):
 	print elem,
 
@@ -140,5 +167,9 @@ if __name__ == "__main__":
 	mlist2 = LList()
 	mlist2.insert(3)
 	mlist2.insert(4)
-	mlist2.insert(5,4)
+	mlist2.insert(5)
+	mlist2.printall()
+	mlist2.sort1()
+	mlist2.printall()
+	mlist2.reverse()
 	mlist2.printall()

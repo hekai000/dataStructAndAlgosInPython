@@ -11,7 +11,7 @@
 
 @software: garner
 
-@file: 2-6类定义实例.py
+@file: LList1.py
 
 @time: 2018/7/10 11:39
 
