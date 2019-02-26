@@ -18,6 +18,7 @@
 @desc:
 
 '''
+from ch05.SStack import SStack
 class GraphError(ValueError):
     pass
 
@@ -114,6 +115,42 @@ class GraphAL(Graph):
             raise GraphError(str(vi) + " is not a valid vertex")
         return self._mat[vi]
 
+
+def DFS_graph(graph, v0):
+    vnum = graph.vertex_num()
+    visited = [0] * vnum
+    visited[v0] = 1
+    DFS_seq = [v0]
+    st = SStack()
+    st.push((0, graph.out_edges(v0)))
+    while not st.is_empty():
+        i, edges = st.pop()
+        if i < len(edges):
+            v, e = edges[i]
+            st.push((i+1, edges))
+            if not visited[v]:
+                DFS_seq.append(v)
+                visited[v] = 1
+                st.push((0, graph.out_edges(v)))
+    return DFS_seq
+
+def DFS_span_forest(graph):
+    vnum = graph.vertex_num()
+    span_forest = [None] * vnum
+
+    def dfs(grahp, v):
+
+        for u, w in graph.out_edges(v):
+            if span_forest[u] is None:
+                span_forest[u] = (v, w)
+                dfs(graph, u)
+
+    for v in range(vnum):
+        if span_forest[v] is None:
+            span_forest[v] = (v, 0)
+            dfs(graph, v)
+    return span_forest
+
 if __name__ == "__main__":
     """
           a
@@ -126,8 +163,12 @@ if __name__ == "__main__":
          \| /
           c
     """
-    g = [[0,1,3,4],[1,0,5,0],[3,5,0,2],[4,0,2,0]]
+    g = [[0,1,3,4], [1,0,5,0], [3,5,0,2],[4,0,2,0]]
     gG = GraphAL(g)
     print gG
     print gG.get_edge(1,2)
     print gG.out_edges(2)
+
+    print DFS_graph(gG, 1)
+
+    print DFS_span_forest(gG)
